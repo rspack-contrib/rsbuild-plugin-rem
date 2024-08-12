@@ -1,7 +1,7 @@
 {
-  "name": "rsbuild-plugin-example",
+  "name": "@rsbuild/plugin-rem",
   "version": "0.0.0",
-  "repository": "https://github.com/rspack-contrib/rsbuild-plugin-template",
+  "repository": "https://github.com/rspack-contrib/rsbuild-plugin-rem",
   "license": "MIT",
   "type": "module",
   "exports": {
