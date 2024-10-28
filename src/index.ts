@@ -88,6 +88,10 @@ export const pluginRem = (
         { headTags, bodyTags },
         { environment, filename, assetPrefix },
       ) => {
+        if (!options.enableRuntime) {
+          return { headTags, bodyTags };
+        }
+
         const entries = Object.keys(environment.entry);
         const { config } = environment;
 
