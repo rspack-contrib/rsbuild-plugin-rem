@@ -43,7 +43,7 @@
     "@playwright/test": "^1.49.0",
     "@rsbuild/core": "^1.1.6",
     "@rsbuild/plugin-react": "^1.0.7",
-    "@rslib/core": "^0.1.1",
+    "@rslib/core": "^0.2.2",
     "@types/node": "^22.10.1",
     "@types/postcss-pxtorem": "^6.1.0",
     "nano-staged": "^0.8.0",
@@ -61,6 +61,11 @@
   "peerDependenciesMeta": {
     "@rsbuild/core": {
       "optional": true
+    }
+  },
+  "pnpm": {
+    "overrides": {
+      "@rspack/core": "1.2.0-alpha.0"
     }
   },
   "packageManager": "pnpm@9.14.4",

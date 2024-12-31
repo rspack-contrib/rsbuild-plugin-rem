@@ -16,7 +16,4 @@ export default defineConfig({
       VERSION: JSON.stringify(pkgJson.version),
     },
   },
-  output: {
-    target: 'node',
-  },
 });
