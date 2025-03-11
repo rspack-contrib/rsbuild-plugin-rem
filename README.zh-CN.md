@@ -56,27 +56,106 @@ const defaultOptions = {
 };
 ```
 
-### 介绍
+### enableRuntime
 
-| 名称                     | 类型       | 默认值                                                                                                                                  | 描述                                                                                                                                          |
-| ------------------------ | ---------- | --------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
-| enableRuntime            | `boolean`  | `true`                                                                                                                                  | 是否自动生成 runtime 代码来动态计算根元素字体大小                                                                                             |
-| inlineRuntime            | `boolean`  | `true`                                                                                                                                  | 是否将 runtime 代码内联到 HTML 文件中。如果设置为 `false`，运行时代码会被抽取为一个独立的 `convert-rem.[version].js` 文件，并输出到产物目录下 |
-| rootFontSize             | `number`   | `50`                                                                                                                                    | 根元素字体值                                                                                                                                  |
-| maxRootFontSize          | `number`   | `64`                                                                                                                                    | 最大根元素字体值                                                                                                                              |
-| widthQueryKey            | `string`   | `'' `                                                                                                                                   | 根据 widthQueryKey 的值去 url query 中取 client width                                                                                         |
-| screenWidth              | `number`   | `375`                                                                                                                                   | UI 设计图宽度                                                                                                                                 |
-| excludeEntries           | `string[]` | `[]`                                                                                                                                    | 设置不注入 runtime 代码的页面入口，通常需要配合 `pxtorem.exclude` 使用                                                                        |
-| supportLandscape         | `boolean`  | `false`                                                                                                                                 | 横屏时使用 height 计算 rem                                                                                                                    |
-| useRootFontSizeBeyondMax | `boolean`  | `false`                                                                                                                                 | 超过 maxRootFontSize 时，是否使用 rootFontSize                                                                                                |
-| pxtorem                  | `object`   | <ul><li>rootValue。默认与 rootFontSize 相同 </li><li>unitPrecision: 5。精确位数 </li><li>propList: ['*']。支持转换的 CSS 属性</li></ul> | [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem#options) 插件属性                                                                   |
+- **类型：** `boolean`
+- **默认值：** `true`
 
-### 示例
+是否自动生成 runtime 代码来动态计算根元素字体大小。
+
+### inlineRuntime
+
+- **类型：** `boolean`
+- **默认值：** `true`
+
+是否将 runtime 代码内联到 HTML 文件中。如果设置为 `false`，运行时代码会被抽取为一个独立的 `convert-rem.[version].js` 文件，并输出到产物目录下。
+
+### rootFontSize
+
+- **类型：** `number`
+- **默认值：** `50`
+
+根元素字体值。
 
 ```js
 pluginRem({
   rootFontSize: 30,
-  excludeEntries: ["404", "page2"],
+});
+```
+
+### maxRootFontSize
+
+- **类型：** `number`
+- **默认值：** `64`
+
+最大根元素字体值。
+
+### widthQueryKey
+
+- **类型：** `string`
+- **默认值：** `''`
+
+根据 `widthQueryKey` 的值去 url query 中取 client width。
+
+### screenWidth
+
+- **类型：** `number`
+- **默认值：** `375`
+
+UI 设计图宽度。
+
+### excludeEntries
+
+- **类型：** `string[]`
+- **默认值：** `[]`
+
+设置不注入 runtime 代码的页面入口，数组的 item 是页面入口的名称。通常需要配合 `pxtorem.exclude` 使用。
+
+```ts
+// rsbuild.config.ts
+import { pluginRem } from "@rsbuild/plugin-rem";
+
+export default {
+  source: {
+    entry: {
+      page1: "./src/page1/index.tsx",
+      page2: "./src/page2/index.tsx",
+    },
+  },
+  plugins: [
+    pluginRem({
+      excludeEntries: ["page2"],
+    }),
+  ],
+};
+```
+
+### supportLandscape
+
+- **类型：** `boolean`
+- **默认值：** `false`
+
+横屏时使用 height 计算 rem。
+
+### useRootFontSizeBeyondMax
+
+- **类型：** `boolean`
+- **默认值：** `false`
+
+超过 `maxRootFontSize` 时，是否使用 `rootFontSize`。
+
+### pxtorem
+
+- **类型：** `object`
+- **默认值：**
+  - `rootValue`：默认与 `rootFontSize` 相同
+  - `unitPrecision`：`5`。精确位数
+  - `propList`：`['*']`。支持转换的 CSS 属性
+
+用于自定义 [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem#options) 插件的选项。
+
+```js
+pluginRem({
   pxtorem: {
     propList: ["font-size"],
   },
