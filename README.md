@@ -60,25 +60,106 @@ const defaultOptions = {
 
 ### Details
 
-| Name                     | Type       | Default                                                                                                              | Description                                                                                                                                                                        |
-| ------------------------ | ---------- | -------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| enableRuntime            | `boolean`  | `true`                                                                                                               | Whether to generate runtime code to calculate and set the font size of the root element                                                                                            |
-| inlineRuntime            | `boolean`  | `true`                                                                                                               | Whether to inline the runtime code to HTML. If set to `false`, the runtime code will be extracted into a separate `convert-rem.[version].js` file and output to the dist directory |
-| rootFontSize             | `number`   | `50`                                                                                                                 | The root element font size                                                                                                                                                         |
-| maxRootFontSize          | `number`   | `64`                                                                                                                 | The root element max font size                                                                                                                                                     |
-| widthQueryKey            | `string`   | `'' `                                                                                                                | Get clientWidth from the url query based on widthQueryKey                                                                                                                          |
-| screenWidth              | `number`   | `375`                                                                                                                | The screen width for UI design drawings (Usually, `fontSize = (clientWidth * rootFontSize) / screenWidth`)                                                                         |
-| excludeEntries           | `string[]` | `[]`                                                                                                                 | To exclude some page entries from injecting runtime code, it is usually used with `pxtorem.exclude`                                                                                |
-| supportLandscape         | `boolean`  | `false`                                                                                                              | Use height to calculate rem in landscape                                                                                                                                           |
-| useRootFontSizeBeyondMax | `boolean`  | `false`                                                                                                              | Whether to use rootFontSize when large than maxRootFontSize                                                                                                                        |
-| pxtorem                  | `object`   | <ul><li>rootValue (Default is the same as rootFontSize) </li><li>unitPrecision: 5 </li><li>propList: ['*']</li></ul> | [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem#options) options                                                                                                         |
+### enableRuntime
 
-### Example
+- **Type:** `boolean`
+- **Default:** `true`
+
+Whether to generate runtime code to calculate and set the font size of the root element.
+
+### inlineRuntime
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+Whether to inline the runtime code to HTML. If set to `false`, the runtime code will be extracted into a separate `convert-rem.[version].js` file and output to the dist directory.
+
+### rootFontSize
+
+- **Type:** `number`
+- **Default:** `50`
+
+The root element font size.
 
 ```js
 pluginRem({
   rootFontSize: 30,
-  excludeEntries: ["404", "page2"],
+});
+```
+
+### maxRootFontSize
+
+- **Type:** `number`
+- **Default:** `64`
+
+The root element max font size.
+
+### widthQueryKey
+
+- **Type:** `string`
+- **Default:** `''`
+
+Get clientWidth from the url query based on `widthQueryKey`.
+
+### screenWidth
+
+- **Type:** `number`
+- **Default:** `375`
+
+The screen width for UI design drawings (Usually, `fontSize = (clientWidth * rootFontSize) / screenWidth`).
+
+### excludeEntries
+
+- **Type:** `string[]`
+- **Default:** `[]`
+
+To exclude some page entries from injecting runtime code, the item is the page entry name. It is usually used with `pxtorem.exclude`.
+
+```ts
+// rsbuild.config.ts
+import { pluginRem } from "@rsbuild/plugin-rem";
+
+export default {
+  source: {
+    entry: {
+      page1: "./src/page1/index.tsx",
+      page2: "./src/page2/index.tsx",
+    },
+  },
+  plugins: [
+    pluginRem({
+      excludeEntries: ["page2"],
+    }),
+  ],
+};
+```
+
+### supportLandscape
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+Use height to calculate rem in landscape.
+
+### useRootFontSizeBeyondMax
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+Whether to use `rootFontSize` when large than `maxRootFontSize`.
+
+### pxtorem
+
+- **Type:** `object`
+- **Default:**
+  - `rootValue`: Default is the same as `rootFontSize`
+  - `unitPrecision`: `5`
+  - `propList`: `['*']`
+
+Customize the [postcss-pxtorem](https://github.com/cuth/postcss-pxtorem#options) options.
+
+```js
+pluginRem({
   pxtorem: {
     propList: ["font-size"],
   },
