@@ -1,6 +1,7 @@
 import path from 'node:path';
 import {
   type NormalizedEnvironmentConfig,
+  type PostCSSPlugin,
   type RsbuildPlugin,
   ensureAssetPrefix,
   logger,
@@ -58,7 +59,7 @@ export const pluginRem = (
       return mergeEnvironmentConfig(config, {
         tools: {
           postcss(_, { addPlugins }) {
-            addPlugins(remPlugin);
+            addPlugins(remPlugin as PostCSSPlugin);
           },
         },
       });
