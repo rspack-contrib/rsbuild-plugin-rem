@@ -36,19 +36,19 @@
   },
   "dependencies": {
     "deepmerge": "^4.3.1",
-    "terser": "^5.40.0"
+    "terser": "^5.43.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
-    "@playwright/test": "^1.52.0",
-    "@rsbuild/core": "^1.3.22",
-    "@rsbuild/plugin-react": "^1.3.1",
-    "@rslib/core": "^0.9.1",
-    "@types/node": "^22.15.29",
+    "@playwright/test": "^1.53.2",
+    "@rsbuild/core": "^1.4.2",
+    "@rsbuild/plugin-react": "^1.3.2",
+    "@rslib/core": "^0.10.4",
+    "@types/node": "^22.15.34",
     "@types/postcss-pxtorem": "^6.1.0",
     "nano-staged": "^0.8.0",
-    "playwright": "^1.52.0",
-    "postcss": "^8.5.4",
+    "playwright": "^1.53.2",
+    "postcss": "^8.5.6",
     "postcss-pxtorem": "^6.1.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
@@ -63,7 +63,7 @@
       "optional": true
     }
   },
-  "packageManager": "pnpm@10.11.0",
+  "packageManager": "pnpm@10.12.4",
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/",
