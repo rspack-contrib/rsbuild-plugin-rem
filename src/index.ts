@@ -102,7 +102,10 @@ export const pluginRem = (
             return false;
           }
           const absolutePath = path.join(api.context.distPath, filename);
-          const reg = new RegExp(`(/${item}/index.html)|(/${item}.html)`, 'gi');
+          const reg = new RegExp(
+            `([/\\\\]${item}[/\\\\]index.html)|([/\\\\]${item}.html)`,
+            'gi',
+          );
           return reg.test(absolutePath);
         });
 
