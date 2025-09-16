@@ -101,9 +101,12 @@ export const pluginRem = (
             logger.error(`convertToRem: can't find the entryName: ${item}`);
             return false;
           }
-
-          const reg = new RegExp(`(/${item}/index.html)|(/${item}.html)`, 'gi');
-          return reg.test(filename);
+          const absolutePath = path.join(api.context.distPath, filename);
+          const reg = new RegExp(
+            `([/\\\\]${item}[/\\\\]index.html)|([/\\\\]${item}.html)`,
+            'gi',
+          );
+          return reg.test(absolutePath);
         });
 
         if (isExclude) {
